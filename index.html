@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>abbas.random10</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABBAS RANDOM</title>
+    <style>
+        /* طرح اصلی */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazir', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* صفحه لاگین */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+        }
+
+        .login-title {
+            font-size: 2.5rem;
+            color: #1a2a6c;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: #1a2a6c;
+            outline: none;
+        }
+
+        .login-label {
+            display: block;
+            text-align: right;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .login-counter {
+            text-align: left;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            color: #1a2a6c;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .login-btn {
+            background: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .login-btn:hover {
+            background: #233a80;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .app {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            display: none;
+        }
+
+        /* هدر */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            margin: 0;
+        }
+
+        .menu button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 5px;
+        }
+
+        .menu button:hover {
+            transform: scale(1.2);
+        }
+
+        /* محتوای اصلی */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .math-display {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            animation: glow 2s infinite alternate;
+            flex-direction: row-reverse;
+        }
+
+        #operator {
+            font-size: 5rem;
+            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        }
+
+        #current-number {
+            font-size: 8rem;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255,255,255,0.8);
+            font-family: 'Vazir', sans-serif;
+        }
+
+        #countdown-display {
+            font-size: 8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        #go-text {
+            font-size: 6rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px #fff;
+            display: none;
+            margin-bottom: 30px;
+            animation: pulse 1s infinite;
+        }
+
+        /* فوتر */
+        footer {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #control-btn {
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            background: rgba(255,255,255,0.9);
+            color: #1a2a6c;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* پنل تنظیمات */
+        #settings-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.4);
+        }
+
+        #settings-panel.active {
+            transform: translateX(-350px);
+        }
+
+        .settings-content {
+            padding: 30px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .settings-content h2 {
+            color: #f1c40f;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .setting {
+            margin-bottom: 25px;
+        }
+
+        .setting label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #ecf0f1;
+        }
+
+        .setting input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 2px solid #3498db;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        #save-settings {
+            width: 100%;
+            padding: 12px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        #save-settings:hover {
+            background: #2ecc71;
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes glow {
+            0% { opacity: 0.9; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* نتیجه نهایی */
+        #final-result {
+            font-size: 1.8rem;
+            background: rgba(0,0,0,0.4);
+            padding: 15px 30px;
+            border-radius: 50px;
+            transition: all 0.5s ease-out;
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        /* بخش پاسخ کاربر */
+        #answer-section {
+            display: none;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #user-answer {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 1.2rem;
+            width: 150px;
+        }
+
+        #submit-answer {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #submit-answer:hover {
+            background: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحه لاگین -->
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-title">SUPERCLEVER</div>
+            <label class="login-label" for="username">Enter Your username</label>
+            <input type="text" id="username" class="login-input" placeholder="Username">
+            <div class="login-counter">0/10</div>
+            
+            <label class="login-label" for="password">Enter Your password</label>
+            <input type="password" id="password" class="login-input" placeholder="Password">
+            <a href="#" class="forgot-password">Forgot Password?</a>
+            
+            <button id="login-btn" class="login-btn">Log in</button>
+        </div>
+    </div>
+
+    <!-- برنامه اصلی -->
+    <div class="app">
+        <header>
+            <h1>ABBAS RANDOM</h1>
+            <div class="menu">
+                <button id="settings-btn">⚙️ تنظیمات</button>
+                <button id="sound-btn">🔊</button>
+                <button id="help-btn">؟</button>
+            </div>
+        </header>
+
+        <!-- پنل تنظیمات کشویی -->
+        <div id="settings-panel">
+            <div class="settings-content">
+                <h2>تنظیمات پیشرفته</h2>
+                <div class="setting">
+                    <label for="min-number">حداقل عدد:</label>
+                    <input type="number" id="min-number" value="0" min="0">
+                </div>
+                <div class="setting">
+                    <label for="max-number">حداکثر عدد:</label>
+                    <input type="number" id="max-number" value="10" min="1">
+                </div>
+                <div class="setting">
+                    <label for="sequence-length">تعداد اعداد:</label>
+                    <input type="number" id="sequence-length" value="5" min="1" max="20">
+                </div>
+                <div class="setting">
+                    <label for="speed">سرعت نمایش (ms):</label>
+                    <input type="number" id="speed" value="1500" min="500" max="3000">
+                </div>
+                <button id="save-settings">ذخیره تنظیمات</button>
+            </div>
+        </div>
+
+        <main>
+            <div id="countdown-display"></div>
+            <div id="go-text">GO!</div>
+            <div class="math-display">
+                <div id="current-number">؟</div>
+                <div id="operator"></div>
+            </div>
+            
+            <!-- بخش پاسخ کاربر -->
+            <div id="answer-section">
+                <input type="number" id="user-answer" placeholder="پاسخ خود را وارد کنید">
+                <button id="submit-answer">بررسی پاسخ</button>
+            </div>
+        </main>
+        
+        <footer>
+            <button id="control-btn">شروع</button>
+            <div id="final-result" class="hidden">
+                <span>نتیجه: </span>
+                <span id="result-value"></span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // مدیریت صفحه لاگین
+        const loginContainer = document.querySelector('.login-container');
+        const app = document.querySelector('.app');
+        const loginBtn = document.getElementById('login-btn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        // اطلاعات لاگین پیش‌فرض
+        const DEFAULT_USERNAME = "abbas";
+        const DEFAULT_PASSWORD = "1396";
+
+        loginBtn.addEventListener('click', () => {
+            if(usernameInput.value === DEFAULT_USERNAME && passwordInput.value === DEFAULT_PASSWORD) {
+                loginContainer.style.display = 'none';
+                app.style.display = 'flex';
+            } else {
+                alert('نام کاربری یا رمز عبور اشتباه است!');
+            }
+        });
+
+        // تبدیل اعداد به فارسی
+        const toPersianNumber = (num) => {
+            const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+            return num.toString().replace(/\d/g, d => persianDigits[d]);
+        };
+
+        // مدیریت منوی کشویی
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsPanel = document.getElementById('settings-panel');
+
+        settingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            settingsPanel.classList.toggle('active');
+        });
+
+        // بستن پنل هنگام کلیک خارج از آن
+        document.addEventListener('click', (e) => {
+            if (!settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+                settingsPanel.classList.remove('active');
+            }
+        });
+
+        // تنظیمات پیشفرض
+        let settings = {
+            minNumber: 0,
+            maxNumber: 10,
+            sequenceLength: 5,
+            speed: 1500
+        };
+
+        // ذخیره تنظیمات
+        document.getElementById('save-settings').addEventListener('click', () => {
+            const newSettings = {
+                minNumber: parseInt(document.getElementById('min-number').value),
+                maxNumber: parseInt(document.getElementById('max-number').value),
+                sequenceLength: parseInt(document.getElementById('sequence-length').value),
+                speed: parseInt(document.getElementById('speed').value)
+            };
+            
+            if (newSettings.minNumber >= newSettings.maxNumber) {
+                alert('حداقل عدد باید کوچکتر از حداکثر باشد!');
+                return;
+            }
+            
+            settings = newSettings;
+            settingsPanel.classList.remove('active');
+        });
+
+        // Audio elements
+        const countdownAudio = new Audio('countdown.mp3');
+        const goAudio = new Audio('go.mp3');
+        const stopAudio = new Audio('stop.mp3');
+        const numberAudio = new Audio('number.mp3');
+        const correctAudio = new Audio('afarin.mp3'); // پاسخ صحیح
+        const wrongAudio = new Audio('error.mp3');    // پاسخ غلط
+
+        // متغیرهای مدیریت پاسخ
+        let userAnswer = null;
+        let isAnswerCorrect = false;
+        const answerSection = document.getElementById('answer-section');
+        const userAnswerInput = document.getElementById('user-answer');
+        const submitAnswerBtn = document.getElementById('submit-answer');
+
+        // بقیه کدهای برنامه
+        const operations = ['+', '-'];
+        let sequence = [];
+        let total = 0;
+        let currentIndex = 0;
+        let isPlaying = false;
+        let intervalId;
+
+        const numberEl = document.getElementById('current-number');
+        const operatorEl = document.getElementById('operator');
+        const controlBtn = document.getElementById('control-btn');
+        const resultValue = document.getElementById('result-value');
+        const finalResult = document.getElementById('final-result');
+        const countdownDisplay = document.getElementById('countdown-display');
+        const goText = document.getElementById('go-text');
+
+        function generateNumbersArray() {
+            const numbers = [];
+            for (let i = settings.minNumber; i <= settings.maxNumber; i++) {
+                numbers.push(i);
+            }
+            return numbers;
+        }
+
+        function generateSequence() {
+            const numbers = generateNumbersArray();
+            sequence = [];
+            total = numbers[Math.floor(Math.random() * numbers.length)];
+            sequence.push({num: total, op: '+'});
+            
+            for (let i = 0; i < settings.sequenceLength - 1; i++) {
+                const num = numbers[Math.floor(Math.random() * numbers.length)];
+                const op = operations[Math.floor(Math.random() * operations.length)];
+                sequence.push({num, op});
+                
+                if (op === '+') {
+                    total += num;
+                } else {
+                    total -= num;
+                }
+            }
+        }
+
+        function playCountdown() {
+            return new Promise((resolve) => {
+                countdownDisplay.style.display = 'block';
+                countdownAudio.play();
+                
+                let count = 3;
+                countdownDisplay.textContent = count;
+                
+                const countdownInterval = setInterval(() => {
+                    count--;
+                    if (count > 0) {
+                        countdownDisplay.textContent = count;
+                        numberAudio.play();
+                    } else {
+                        clearInterval(countdownInterval);
+                        countdownDisplay.style.display = 'none';
+                        goText.style.display = 'block';
+                        goAudio.play();
+                        
+                        setTimeout(() => {
+                            goText.style.display = 'none';
+                            resolve();
+                        }, 1000);
+                    }
+                }, 1000);
+            });
+        }
+
+        function showNextNumber() {
+            if (currentIndex >= sequence.length) {
+                stopSequence();
+                return;
+            }
+            
+            const {num, op} = sequence[currentIndex];
+            
+            numberEl.textContent = toPersianNumber(num);
+            operatorEl.textContent = currentIndex > 0 ? op : '';
+            numberAudio.play();
+            
+            // اعمال انیمیشن
+            numberEl.style.animation = 'none';
+            operatorEl.style.animation = 'none';
+            setTimeout(() => {
+                numberEl.style.animation = 'popIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                operatorEl.style.animation = 'popIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            }, 10);
+            
+            currentIndex++;
+        }
+
+        async function startSequence() {
+            if (isPlaying) return;
+            
+            isPlaying = true;
+            controlBtn.textContent = 'توقف';
+            generateSequence();
+            currentIndex = 0;
+            finalResult.classList.add('hidden');
+            answerSection.style.display = 'none';
+            
+            await playCountdown();
+            
+            intervalId = setInterval(() => {
+                showNextNumber();
+            }, settings.speed);
+        }
+
+        function stopSequence() {
+            clearInterval(intervalId);
+            isPlaying = false;
+            controlBtn.textContent = 'شروع';
+            stopAudio.play();
+            answerSection.style.display = 'block'; // نمایش بخش ورود پاسخ
+        }
+
+        function checkUserAnswer() {
+            const answer = parseInt(userAnswerInput.value);
+            
+            if (isNaN(answer)) {
+                alert("لطفاً یک عدد وارد کنید!");
+                return;
+            }
+            
+            if (answer === total) {
+                isAnswerCorrect = true;
+                correctAudio.play();
+                finalResult.style.color = "#2ecc71";
+                finalResult.style.textShadow = "0 0 10px rgba(46, 204, 113, 0.7)";
+                alert("آفرین! پاسخ شما صحیح است!");
+            } else {
+                isAnswerCorrect = false;
+                wrongAudio.play();
+                finalResult.style.color = "#e74c3c";
+                finalResult.style.textShadow = "0 0 10px rgba(231, 76, 60, 0.7)";
+                alert(`متأسفیم! پاسخ صحیح ${toPersianNumber(total)} بود.`);
+            }
+            
+            showResult();
+        }
+
+        function showResult() {
+            resultValue.textContent = toPersianNumber(total);
+            finalResult.classList.remove('hidden');
+            numberEl.textContent = '؟';
+            operatorEl.textContent = '';
+            controlBtn.textContent = 'شروع';
+            answerSection.style.display = 'none'; // مخفی کردن بخش ورود پاسخ
+            userAnswerInput.value = ''; // پاک کردن مقدار قبلی
+        }
+
+        // Event Listeners
+        controlBtn.addEventListener('click', () => {
+            if (controlBtn.textContent === 'شروع') {
+                startSequence();
+            } else if (controlBtn.textContent === 'توقف') {
+                stopSequence();
+            }
+        });
+
+        submitAnswerBtn.addEventListener('click', checkUserAnswer);
+
+        // اضافه کردن امکان ارسال با کلید Enter
+        userAnswerInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkUserAnswer();
+            }
+        });
+
+        // بارگذاری فونت فارسی
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+
+        // پر کردن خودکار اطلاعات لاگین برای تست
+        window.addEventListener('load', () => {
+            usernameInput.value = DEFAULT_USERNAME;
+            passwordInput.value = DEFAULT_PASSWORD;
+        });
+    </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
